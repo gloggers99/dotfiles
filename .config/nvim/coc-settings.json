@@ -1,0 +1,41 @@
+{
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			"args": ["--log-file=/tmp/ccls.log", "-v=1"],
+			"filetypes": ["c", "cpp", "h", "hpp"],
+			"rootPatterns": [".ccls", "compile_commands.json"],
+			"initializationOptions": {
+				"cache": {
+					"directory": "/tmp/ccls"
+				},
+				"client": {
+					"snippetSupport": false
+				},
+				"index": {
+					"onChange": true
+				},
+				"highlight": { "isRanges": true },
+				"extraArgs": ["-std=c++17"]
+			}
+		},
+		"haskell": {
+			"command": "haskell-language-server-wrapper",
+			"args": [
+				"--lsp"
+			],
+			"rootPatterns": [
+				".stack.yml",
+				".hie-bios",
+				"BUILD.bazel",
+				"cabal.config",
+				"package.yaml"
+			],
+			"filetypes": [
+				"hs",
+				"lhs",
+				"haskell"
+			]
+		},
+	}
+}
