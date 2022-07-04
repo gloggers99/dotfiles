@@ -35,9 +35,9 @@
 
 
 !! URxvt Appearance
-URxvt.font: xft:JetBrainsMono Nerd Font:size=11
-URxvt.letterSpace: 0
-URxvt.lineSpace: 0
+URxvt.font: xft:mononoki Nerd Font:size=12
+URxvt.letterSpace: 1
+URxvt.lineSpace: 1
 URxvt.geometry: 92x24
 URxvt.internalBorder: 8
 URxvt.cursorBlink: true

@@ -90,10 +90,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 myLayout = avoidStruts (threeCol ||| tiled ||| Full)
   where
-     tiled    = spacingRaw False (Border 7 2 7 7) True (Border 7 7 7 7) True
+     tiled    = spacingRaw False (Border 18 18 18 18) True (Border 7 7 7 7) True
               $ Tall nmaster delta ratio
 
-     threeCol = spacingRaw False (Border 7 2 7 7) True (Border 7 7 7 7) True
+     threeCol = spacingRaw False (Border 18 18 18 18) True (Border 7 7 7 7) True
               $ ThreeColMid nmaster delta (6/12)
 
      nmaster  = 1
@@ -110,10 +110,7 @@ myEventHook = fullscreenEventHook
 
 myLogHook = return ()
 
-startPolybar = do
-    spawn "polybar workspace-bar"
-    spawn "polybar windowname-bar"
-    spawn "polybar tray-bar"
+startPolybar = spawn "polybar ultibar"
 
 killPolybar = spawn "killall polybar"
 
