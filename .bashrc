@@ -19,4 +19,3 @@ export PS1="\[\033[35m\]\u \[\033[34m\]\W \[\033[37m\]$ \[\033[0;0m\]"
 alias ls=exa
 export PATH=$PATH:/home/lucas/.gigachad/bin
 export PATH="$PATH:/home/lucas/.dotnet/tools:/home/lucas/opt/cross/bin"
-alias neofetch="neofetch --w3m ./downloads/artworks-DfDLRYUqkm9IDWcy-AYXT0w-t500x500.jpg"
