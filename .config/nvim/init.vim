@@ -12,6 +12,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-syntastic/syntastic'
 Plug 'voldikss/vim-floaterm'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
@@ -39,6 +40,7 @@ set nowritebackup
 set encoding=utf-8
 
 nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-s> :vsplit<CR>
 nnoremap <C-h> :split<CR>
 
