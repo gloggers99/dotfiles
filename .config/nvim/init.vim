@@ -13,6 +13,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-syntastic/syntastic'
 Plug 'voldikss/vim-floaterm'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ollykel/v-vim'
 
 call plug#end()
 
@@ -55,6 +56,8 @@ let g:syntastic_c_checkers = ['cpplint']
 let g:syntastic_cpp_cpplint_exec = 'cpplint'
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:v_autofmt_bufwritepre = 1
 
 if has("nvim-0.5.0") || has("patch-8.1.1564")
   set signcolumn=number
