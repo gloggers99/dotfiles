@@ -1,5 +1,7 @@
 lua require('plugins')
 
-set list lcs=tab:\|\ 
-
 set number relativenumber
+
+nnoremap o<CR> :CodeActionMenu<CR>
+nnoremap oa :AerialToggle<CR>
+nnoremap of :CHADopen<CR>
