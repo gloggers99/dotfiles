@@ -2,14 +2,14 @@ Config {
      font =         "JetBrainsMono Nerd Font 12"
    , bgColor =      "#1a1a1a"
    , fgColor =      "#646464"
-   , position =     Bottom
+   , position =     BottomW L 90
    , border =       TopB
    , borderWidth = 1
    , borderColor =  "#646464"
 
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%XMonadLog% }{ %date% | %battery%"
+   , template = "%XMonadLog% }{ %volume% | %date% | %battery% "
 
    , lowerOnStart =     True    -- send to bottom of window stack on start
    , hideOnStart =      False   -- start with window unmapped (hidden)
@@ -76,5 +76,6 @@ Config {
         , Run Date           "<fc=#ABABAB>%F (%a) %T</fc>" "date" 10
 
         , Run XMonadLog
+        , Run Com "/home/lucas/.config/xmobar/volume_pipewire.sh" [] "volume" 1
         ]
    }

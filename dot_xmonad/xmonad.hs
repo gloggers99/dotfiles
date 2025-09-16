@@ -14,6 +14,8 @@ import XMonad.Util.EZConfig
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Loggers
 
+import Graphics.X11.ExtraTypes.XF86
+
 import Data.Monoid
 import System.Exit
 
@@ -35,58 +37,32 @@ myModMask       = mod4Mask
 
 myWorkspaces    = ["DEV","WWW","SYS","GAM","MUS","IRC"]
 
-
 myNormalBorderColor  = "#2a2a2a"
 myFocusedBorderColor = "#7fb4ca"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    -- launch dmenu
-    [ ((modm .|. shiftMask, xK_c     ), kill)
-  
-     -- Rotate through the available layout algorithms
+    [ ((modm .|. shiftMask, xK_Return), spawn myTerminal)
+    , ((modm,               xK_p), spawn myLauncher)
+    , ((modm .|. shiftMask, xK_c     ), kill)
     , ((modm,               xK_space ), sendMessage NextLayout)
-  
-    --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-  
-    -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
-  
-    -- Move focus to the next window
     , ((modm,               xK_Tab   ), windows W.focusDown)
-  
-    -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
-  
-    -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp  )
-  
-    -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
-  
-    -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
-  
-    -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-  
-    -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-  
-    -- Shrink the master area
     , ((modm,               xK_h     ), sendMessage Shrink)
-  
-    -- Expand the master area
     , ((modm,               xK_l     ), sendMessage Expand)
-  
-    -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
-  
-    -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-  
-    -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+
+    , ((0, xF86XK_AudioLowerVolume), spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+    , ((0, xF86XK_AudioRaiseVolume), spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
+    , ((0, xF86XK_AudioMute), spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
   
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -223,6 +199,10 @@ myStartupHook = do
     spawnOnce "xsetroot -solid \"#181616\""
     spawnOnce "xsetroot -cursor_name left_ptr"
 
+    spawnOnce "trayer --edge bottom --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18"
+
+    spawnOnce "dunst"
+
     spawnOnce myLauncher
 
 myXmobarPP :: PP
@@ -233,15 +213,13 @@ myXmobarPP = def
     , ppHidden          = white . wrap " " ""
     , ppHiddenNoWindows = lowWhite . wrap " " ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-    , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
+    , ppOrder           = \[ws, l, _, _] -> [ws, l]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
     }
   where
     formatFocused   = wrap (white    "[") (white    "]") . magenta . ppWindow
     formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . blue    . ppWindow
 
-    -- | Windows should have *some* title, which should not not exceed a
-    -- sane length.
     ppWindow :: String -> String
     ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
@@ -253,11 +231,6 @@ myXmobarPP = def
     red      = xmobarColor "#c4746e" ""
     lowWhite = xmobarColor "#727169" ""
 
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
-
--- Run xmonad with the settings you specify. No need to modify this.
---
 main = xmonad 
      $ ewmhFullscreen 
      $ ewmh 
@@ -274,7 +247,7 @@ main = xmonad
         focusedBorderColor = myFocusedBorderColor,
 
       -- key bindings
-      --  keys               = myKeys,
+        keys               = myKeys,
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
@@ -283,14 +256,4 @@ main = xmonad
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
         startupHook        = myStartupHook
-    } `additionalKeysP` [
-        -- Control binds
-        ("M-S-q", io (exitWith ExitSuccess))
-    ,   ("M-q", spawn "xmonad --recompile; xmonad --restart")
-
-        -- Apps
-    ,   ("M-S-Return", spawn myTerminal) -- Terminal
-    ,   ("M-b", spawn "zen-browser")     -- Browser
-    ,   ("M-p", spawn myLauncher)       -- dmenu
-    ]
-
+     }
