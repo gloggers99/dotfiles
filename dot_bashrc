@@ -7,4 +7,4 @@ export QT_STYLE_OVERRIDE=Adwaita-Dark
 
 alias ls=eza
 
-alias update-dotfiles="chezmoi re-add"
+alias update-dotfiles="chezmoi re-add && chezmoi cd && git push && exit"
