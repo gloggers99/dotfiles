@@ -13,7 +13,7 @@ MUTE=$(wpctl get-mute "$SINK" 2>/dev/null)
 VOL=$(awk "BEGIN { printf \"%d\", $VOL_DEC * 100 }")
 
 # define bar length
-TOTAL=10
+TOTAL=20
 FILLED=$((VOL * TOTAL / 100))
 EMPTY=$((TOTAL - FILLED))
 
