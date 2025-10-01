@@ -1,4 +1,4 @@
-Xft.dpi: 120
+!Xft.dpi: 120
 
 ! These might also be useful depending on your monitor and personal preference:
 Xft.autohint: 0
@@ -7,3 +7,53 @@ Xft.hintstyle:  hintfull
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard 
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+! --- Fonts ---
+URxvt.font: xft:JetBrainsMono Nerd Font:size=11
+URxvt.boldFont: xft:JetBrainsMono Nerd Font:size=11:weight=bold
+
+! --- Kanagawa Dragon Colors ---
+! Background / Foreground
+*.background:  #181616
+*.foreground:  #c5c9c5
+*.cursorColor: #c8c093
+
+! Black
+*.color0:   #0d0c0c
+*.color8:   #727169
+
+! Red
+*.color1:   #c4746e
+*.color9:   #e46876
+
+! Green
+*.color2:   #8a9a7b
+*.color10:  #87a987
+
+! Yellow
+*.color3:   #c4b28a
+*.color11:  #e6c384
+
+! Blue
+*.color4:   #8ba4b0
+*.color12:  #7fb4ca
+
+! Magenta
+*.color5:   #a292a3
+*.color13:  #938aa9
+
+! Cyan
+*.color6:   #8ea4a2
+*.color14:  #7aa89f
+
+! White
+*.color7:   #c8c093
+*.color15:  #dcd7ba
+
+! --- Extras for urxvt ---
+URxvt*scrollBar: false
+URxvt*internalBorder: 12
+URxvt*letterSpace: 0

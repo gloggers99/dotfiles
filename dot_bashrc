@@ -3,4 +3,6 @@
 
 alias ls=eza
 
+export MOZ_USE_XINPUT2=1
+
 alias update-dotfiles="chezmoi re-add && cd ~/.local/share/chezmoi && git push && cd"
